@@ -155,19 +155,3 @@ Agent Response: Successfully executed CalculatorTool. Calculated Value = 42.0 (C
 ================================================================================
 ```
 
----
-
-## 📋 Applicant & Candidate Submission Details
-
-- **Candidate Name**: titanShubh (guptashubh926@gmail.com)
-- **Target Company**: Cognizant Technology Solutions
-- **Target Role**: GenAI / LLM Application Developer
-- **Primary Language**: Java 17
-- **Key Competencies**: RAG Architecture, Vector Search, LLM Agents, Clean Architecture
-- **Repository URL**: https://github.com/titanShubh/cognizant-java-llm-orchestrator
-
----
-
-<p align="center">
-  <i>Developed for Cognizant Selection Process • Built with Java 17</i>
-</p>
