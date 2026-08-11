@@ -35,23 +35,16 @@ This project showcases enterprise-grade Java engineering standards, clean Object
 ## 🏗️ Architecture & Data Flow
 
 ```mermaid
-graph TD
-    %% Node Styling
-    classDef user fill:#2d3748,stroke:#4a5568,color:#ffffff,stroke-width:2px;
-    classDef engine fill:#1a365d,stroke:#2b6cb0,color:#ffffff,stroke-width:2px;
-    classDef vector fill:#2c5282,stroke:#3182ce,color:#ffffff,stroke-width:2px;
-    classDef agent fill:#276749,stroke:#38a169,color:#ffffff,stroke-width:2px;
-    classDef output fill:#742a2a,stroke:#c53030,color:#ffffff,stroke-width:2px;
-
-    User[👤 User / Client Prompt] :::user --> PromptEngine[📝 Prompt Template Engine]
-    PromptEngine --> RAG[🔍 RAG Orchestrator]
-    RAG --> VectorStore[(⚡ In-Memory Vector Store)] :::vector
-    VectorStore -- Cosine Similarity Search --> Context[📚 Top-K Retrieved Document Chunks]
-    Context --> Provider[🧠 LLM Provider Interface] :::engine
-    Provider --> Agent{🤖 Autonomous LLM Agent} :::agent
-    Agent -- Direct Answer --> Out[✨ Synthesized Response] :::output
-    Agent -- Tool Call Request --> Tool[🛠️ Calculator / DB Tool] :::agent
-    Tool -- Execution Result --> Agent
+flowchart TD
+    User["User / Client Prompt"] --> PromptEngine["Prompt Template Engine"]
+    PromptEngine --> RAG["RAG Orchestrator"]
+    RAG --> VectorStore[("In-Memory Vector Store")]
+    VectorStore -->|Cosine Similarity Search| Context["Top-K Retrieved Context Chunks"]
+    Context --> Provider["LLM Provider Interface"]
+    Provider --> Agent{"Autonomous LLM Agent"}
+    Agent -->|Direct Answer| Out["Synthesized Response"]
+    Agent -->|Tool Call Request| Tool["Calculator / DB Tool"]
+    Tool -->|Execution Result| Agent
 ```
 
 ---
