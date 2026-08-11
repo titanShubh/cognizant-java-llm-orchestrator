@@ -2,17 +2,17 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Language-Java_17-orange.svg?style=for-the-badge&logo=java" alt="Java 17" />
-  <img src="https://img.shields.io/badge/Architecture-RAG_%26_LLM_Agents-blue.svg?style=for-the-badge&logo=ai" alt="RAG & Agents" />
+  <img src="https://img.shields.io/badge/Language-Python_3.10+-blue.svg?style=for-the-badge&logo=python" alt="Python 3.10+" />
+  <img src="https://img.shields.io/badge/Architecture-RAG_%26_LLM_Agents-brightgreen.svg?style=for-the-badge&logo=ai" alt="RAG & Agents" />
   <img src="https://img.shields.io/badge/Target_Role-Cognizant_GenAI_Engineer-003366.svg?style=for-the-badge" alt="Cognizant Role" />
   <img src="https://img.shields.io/badge/Build-Passing-brightgreen.svg?style=for-the-badge" alt="Build Status" />
-  <img src="https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge" alt="License" />
 </p>
 
 ---
 
 ## 🎯 Executive Summary
 
-The **Cognizant Enterprise Java LLM Orchestrator** is a production-ready, modular Java 17 framework built to demonstrate end-to-end Large Language Model (LLM) application integration, Retrieval-Augmented Generation (RAG) vector search pipelines, dynamic system prompt orchestration, and autonomous agent tool-calling capabilities.
+The **Cognizant Enterprise Dual-Stack (Java & Python) LLM Orchestrator** is a production-ready framework built to demonstrate end-to-end Large Language Model (LLM) application integration, Retrieval-Augmented Generation (RAG) vector search pipelines, dynamic system prompt orchestration, and autonomous agent tool-calling capabilities in both **Java 17** and **Python 3.10+**.
 
 This project showcases enterprise-grade Java engineering standards, clean Object-Oriented Design (OOD), zero external dependencies for offline testing, and seamless compatibility with cloud APIs like OpenAI, Google Gemini, and Spring AI.
 
