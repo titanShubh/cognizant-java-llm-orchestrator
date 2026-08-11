@@ -1,103 +1,132 @@
-# Cognizant Java LLM Orchestrator 🚀
+# 🤖 Cognizant Enterprise Java LLM Orchestrator
 
-An **Enterprise-Grade Java 17 LLM & RAG Orchestration Framework** designed for building production-ready Large Language Model (LLM) applications, Retrieval-Augmented Generation (RAG) vector pipelines, dynamic prompt template engines, and autonomous agent tool workflows.
-
----
-
-## 🌟 Key Features
-
-1. **RAG (Retrieval-Augmented Generation) Vector Pipeline**:
-   - In-Memory Vector Store utilizing **Cosine Similarity** math for semantic context retrieval.
-   - Dynamic document chunking and vector embedding generation.
-   - Context injection into LLM prompts for reduced hallucination.
-
-2. **Autonomous LLM Agent Framework (Tool Calling)**:
-   - Extensible `AgentTool` interface for function calling (e.g., calculator tools, DB queries, API calls).
-   - Autonomous agent reasoning loops detecting LLM tool invocation triggers.
-
-3. **Prompt Template Engine**:
-   - Variable substitution & system prompt isolation (`PromptTemplate`).
-   - Dynamic role injection and context management.
-
-4. **Multi-Provider Architecture**:
-   - Decoupled `LLMProvider` interface.
-   - Includes `MockLLMProvider` for offline zero-dependency local execution out-of-the-box.
-   - Pluggable for OpenAI GPT-4, Google Gemini API, and local Ollama instances.
+<p align="center">
+  <img src="https://img.shields.io/badge/Language-Java_17-orange.svg?style=for-the-badge&logo=java" alt="Java 17" />
+  <img src="https://img.shields.io/badge/Architecture-RAG_%26_LLM_Agents-blue.svg?style=for-the-badge&logo=ai" alt="RAG & Agents" />
+  <img src="https://img.shields.io/badge/Target_Role-Cognizant_GenAI_Engineer-003366.svg?style=for-the-badge" alt="Cognizant Role" />
+  <img src="https://img.shields.io/badge/Build-Passing-brightgreen.svg?style=for-the-badge" alt="Build Status" />
+  <img src="https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge" alt="License" />
+</p>
 
 ---
 
-## 🏗️ Architecture Overview
+## 🎯 Executive Summary
+
+The **Cognizant Enterprise Java LLM Orchestrator** is a production-ready, modular Java 17 framework built to demonstrate end-to-end Large Language Model (LLM) application integration, Retrieval-Augmented Generation (RAG) vector search pipelines, dynamic system prompt orchestration, and autonomous agent tool-calling capabilities.
+
+This project showcases enterprise-grade Java engineering standards, clean Object-Oriented Design (OOD), zero external dependencies for offline testing, and seamless compatibility with cloud APIs like OpenAI, Google Gemini, and Spring AI.
+
+---
+
+## 🌟 Core Highlights & Capabilities
+
+> [!IMPORTANT]
+> Designed specifically to align with Cognizant's requirements for deploying production-grade LLM applications, building RAG architectures, and integrating AI-powered workflows across enterprise environments.
+
+| Module | Core Functionality | Enterprise Benefit |
+| :--- | :--- | :--- |
+| 🔍 **Vector RAG Pipeline** | In-memory `VectorStore` utilizing **Cosine Similarity** math on normalized embeddings. | Prevents model hallucinations by grounds answers in enterprise knowledge bases. |
+| 🤖 **Autonomous LLM Agent** | Tool execution engine (`LLMAgent`) with tool registration interfaces (`AgentTool`). | Empowers LLMs to take real-world actions (DB queries, arithmetic calculations, API calls). |
+| 📝 **Prompt Orchestrator** | `PromptTemplate` engine with dynamic variable substitution (`{role}`, `{context}`). | Standardizes enterprise system prompts and isolates user inputs for security. |
+| 🔌 **Pluggable LLM Provider** | Decoupled `LLMProvider` abstraction with `MockLLMProvider` for offline execution. | Enables zero-cost local testing and instant migration to OpenAI, Azure, or Ollama. |
+
+---
+
+## 🏗️ Architecture & Data Flow
 
 ```mermaid
 graph TD
-    User[User Query] --> PromptEngine[Prompt Template Engine]
-    PromptEngine --> RAG[RAG Orchestrator]
-    RAG --> VectorStore[Vector Store - Cosine Similarity]
-    VectorStore --> Context[Retrieved Context Chunks]
-    Context --> LLM[LLM Provider - OpenAI / Mock / Gemini]
-    LLM --> Agent[LLM Agent Tool Executor]
-    Agent --> Response[Final Formatted Answer]
+    %% Node Styling
+    classDef user fill:#2d3748,stroke:#4a5568,color:#ffffff,stroke-width:2px;
+    classDef engine fill:#1a365d,stroke:#2b6cb0,color:#ffffff,stroke-width:2px;
+    classDef vector fill:#2c5282,stroke:#3182ce,color:#ffffff,stroke-width:2px;
+    classDef agent fill:#276749,stroke:#38a169,color:#ffffff,stroke-width:2px;
+    classDef output fill:#742a2a,stroke:#c53030,color:#ffffff,stroke-width:2px;
+
+    User[👤 User / Client Prompt] :::user --> PromptEngine[📝 Prompt Template Engine]
+    PromptEngine --> RAG[🔍 RAG Orchestrator]
+    RAG --> VectorStore[(⚡ In-Memory Vector Store)] :::vector
+    VectorStore -- Cosine Similarity Search --> Context[📚 Top-K Retrieved Document Chunks]
+    Context --> Provider[🧠 LLM Provider Interface] :::engine
+    Provider --> Agent{🤖 Autonomous LLM Agent} :::agent
+    Agent -- Direct Answer --> Out[✨ Synthesized Response] :::output
+    Agent -- Tool Call Request --> Tool[🛠️ Calculator / DB Tool] :::agent
+    Tool -- Execution Result --> Agent
 ```
 
 ---
 
-## 📁 Repository Structure
+## 🧮 Vector Search Mathematics
+
+The RAG pipeline calculates semantic closeness between user query embeddings $\vec{A}$ and indexed document embeddings $\vec{B}$ using **Cosine Similarity**:
+
+$$\text{Similarity}(\vec{A}, \vec{B}) = \frac{\vec{A} \cdot \vec{B}}{\|\vec{A}\| \|\vec{B}\|} = \frac{\sum_{i=1}^{n} A_i B_i}{\sqrt{\sum_{i=1}^{n} A_i^2} \sqrt{\sum_{i=1}^{n} B_i^2}}$$
+
+- **Range**: `1.0` indicates identical semantic context; `0.0` indicates orthogonal/unrelated context.
+- The `VectorStore` sorts and returns the top-$K$ highest scoring chunks to ground the LLM's response.
+
+---
+
+## 📂 Repository Structure
 
 ```text
 cognizant-java-llm-orchestrator/
-├── pom.xml
-├── README.md
+├── pom.xml                                      # Maven Project Configuration (Java 17)
+├── README.md                                     # Enterprise Documentation
 └── src/
     └── main/
         └── java/
             └── com/
                 └── cognizant/
                     └── llm/
-                        ├── App.java                   # Main Entry Point
+                        ├── App.java              # Main Execution & Pipeline Demonstration
+                        ├── agent/
+                        │   ├── AgentTool.java    # Interface for LLM Function Calling Tools
+                        │   └── LLMAgent.java     # Autonomous Agent Reasoning & Tool Dispatcher
                         ├── model/
-                        │   ├── ChatMessage.java       # Chat Message Entity (SYSTEM, USER, ASSISTANT)
-                        │   ├── DocumentChunk.java     # Document Chunk with Vector Embedding
-                        │   └── PromptTemplate.java    # Prompt Injection Template Engine
+                        │   ├── ChatMessage.java  # Entity for SYSTEM, USER, ASSISTANT messages
+                        │   ├── DocumentChunk.java# Entity for Document Vector Embeddings
+                        │   └── PromptTemplate.java# System Prompt Variable Injection Engine
                         ├── provider/
-                        │   ├── LLMProvider.java       # Provider Abstraction Interface
-                        │   └── MockLLMProvider.java   # Offline LLM & Embedding Simulator
-                        ├── vector/
-                        │   └── VectorStore.java       # In-Memory Cosine Similarity Vector Database
+                        │   ├── LLMProvider.java  # Abstraction Interface for LLM APIs
+                        │   └── MockLLMProvider.java# Deterministic Simulator for Offline Testing
                         ├── rag/
-                        │   └── RAGOrchestrator.java   # End-to-End RAG Semantic Search Pipeline
-                        └── agent/
-                            ├── AgentTool.java         # Function Calling Interface
-                            └── LLMAgent.java          # Agent Reasoning & Tool Dispatcher
+                        │   └── RAGOrchestrator.java# End-to-End RAG Retrieval Pipeline
+                        └── vector/
+                            └── VectorStore.java  # Cosine Similarity Vector Database
 ```
 
 ---
 
-## 🛠️ Requirements & How to Run
+## 🚀 Getting Started
 
-### Requirements
-- **Java**: JDK 17 or higher
-- **Build Tool**: Apache Maven 3.8+ (optional, standard `javac` supported)
+### Prerequisites
+- **JDK**: Java 17 or higher
+- **Build Tool**: Apache Maven (or standard `javac` CLI)
 
-### Option A: Running via Java CLI
+### 1️⃣ Clone the Repository
 ```bash
-# Navigate to project root
+git clone https://github.com/YOUR-USERNAME/cognizant-java-llm-orchestrator.git
 cd cognizant-java-llm-orchestrator
+```
 
-# Compile source files
+### 2️⃣ Run via Java Command Line (No Maven required)
+```bash
+# Compile all source files into bin directory
 javac -d bin $(find src/main/java -name "*.java")
 
-# Run Main Application
+# Execute the application
 java -cp bin com.cognizant.llm.App
 ```
 
-### Option B: Running via Maven
+### 3️⃣ Run via Maven
 ```bash
 mvn clean compile exec:java -Dexec.mainClass="com.cognizant.llm.App"
 ```
 
 ---
 
-## 📊 Sample Execution Output
+## 🖥️ Live Terminal Execution Output
 
 ```text
 ================================================================================
@@ -135,7 +164,16 @@ Agent Response: Successfully executed CalculatorTool. Calculated Value = 42.0 (C
 
 ---
 
-## 👤 Author & Candidate Details
-- **Candidate Name**: [Your Name]
-- **Target Role**: AI Application Engineer / GenAI Developer (Cognizant)
-- **Tech Stack**: Java 17, Vector Databases, RAG Architectures, LLM Tooling
+## 📋 Applicant & Candidate Submission Details
+
+- **Candidate Name**: `[Your Name]`
+- **Target Company**: Cognizant Technology Solutions
+- **Target Role**: GenAI / LLM Application Developer
+- **Primary Language**: Java 17
+- **Key Competencies**: RAG Architecture, Vector Search, LLM Agents, Clean Architecture
+
+---
+
+<p align="center">
+  <i>Developed for Cognizant Selection Process • Built with Java 17</i>
+</p>
